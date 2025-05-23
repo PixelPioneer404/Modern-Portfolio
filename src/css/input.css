@@ -1,1 +1,21 @@
+/* fonts */
+@import url('https://fonts.cdnfonts.com/css/satoshi'); /* Satoshi font */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap'); /* Manrope font */
+
 @import "tailwindcss";
+
+@theme {
+    --font-satoshi: 'Satoshi', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+    --bg-color: #edede9;
+    --primary-text-color: #191923;
+    --secondary-text-color: #ffffff;
+}
+
+@layer utilities {
+    .text-stroke {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #191923;
+    -webkit-text-fill-color: transparent;
+  }
+}
