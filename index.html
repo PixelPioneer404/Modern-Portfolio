@@ -9,6 +9,11 @@
 </head>
 
 <body class="bg-[var(--bg-color)] select-none">
+    <div class="absolute right-8 top-1/5 origin-right flex justify-center items-center gap-4 -rotate-90">
+        <div class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)]">LINKEDIN</div>
+        <div class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)]">INSTAGRAM</div>
+        <div class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)]">GITHUB</div>
+    </div>
     <header class="fixed top-0 w-full h-16 bg-transparent z-50 backdrop-blur-sm">
         <nav class="flex items-center justify-between h-full px-8 text-sm font-medium text-[var(--primary-text-color)]">
             <!-- 1. Logo -->
@@ -18,25 +23,72 @@
 
             <!-- 2. Centered links -->
             <ul class="flex justify-center gap-6 w-full">
-                <li><a href="#" class="hover:underline decoration-none">SERVICES</a></li>
-                <li><a href="#" class="hover:underline decoration-none">WORKS</a></li>
-                <li><a href="#" class="hover:underline decoration-none">BLOG</a></li>
-                <li><a href="#" class="hover:underline decoration-none">ABOUT</a></li>
+                <li><a href="#" class="relative group inline-block decoration-none">
+                        <div
+                            class="absolute inset-0 border-b-1 border-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                        </div>
+                        <p class="">WORKS</p>
+                    </a>
+                </li>
+                <li><a href="#" class="relative group inline-block decoration-none">
+                        <div
+                            class="absolute inset-0 border-b-1 border-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                        </div>
+                        <p class="">SERVICES</p>
+                    </a>
+                </li>
+                <li><a href="#" class="relative group inline-block decoration-none">
+                        <div
+                            class="absolute inset-0 border-b-1 border-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                        </div>
+                        <p class="">BLOG</p>
+                    </a>
+                </li>
+                <li><a href="#" class="relative group inline-block decoration-none">
+                        <div
+                            class="absolute inset-0 border-b-1 border-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                        </div>
+                        <p class="">ABOUT</p>
+                    </a>
+                </li>
             </ul>
 
             <!-- 3. Toggle icon -->
-            <button class="cursor-pointer absolute right-8" id="toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
-                    fill="#000000">
-                    <path
-                        d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z" />
-                </svg>
+            <button
+                class="group cursor-pointer absolute right-8 px-5 py-1 bg-transparent border-1 border-[var(--primary-text-color)]"
+                id="resume">
+                <p
+                    class="relative z-51 font-satoshi font-medium text-[var(--primary-text-color)] text-lg group-hover:text-[var(--bg-color)] transition-all duration-300 ease-in-out whitespace-nowrap">
+                    Résumé</p>
+                <div
+                    class="absolute inset-0 bg-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                </div>
             </button>
         </nav>
     </header>
     <main class="w-full h-[calc(100vh-64px)] mt-16">
         <section class="w-full h-full grid grid-cols-[85%_15%] px-8 pb-4" id="home">
             <div class="relative w-auto h-auto m-0 p-0 flex flex-col justify-end items-start">
+                <div class="relative my-auto -translate-y-1/2 flex justify-start items-center gap-8">
+                    <div class="relative flex flex-col justify-center items-start">
+                        <span class="absolute top-0 left-0 -translate-x-full">+</span>
+                        <p
+                            class="font-manrope font-normal text-[40px] text-[var(--primary-text-color)] leading-none tracking-[0px]">
+                            200</p>
+                        <p
+                            class="font-satoshi font-semibold text-[8px] text-[var(--primary-text-color)]/60 leading-none tracking-wider">
+                            PROJECTS COMPLETED</p>
+                    </div>
+                    <div class="relative flex flex-col justify-center items-start">
+                        <span class="absolute top-0 left-0 -translate-x-full">+</span>
+                        <p
+                            class="font-manrope font-normal text-[40px] text-[var(--primary-text-color)] leading-none tracking-[0px]">
+                            40</p>
+                        <p
+                            class="font-satoshi font-semibold text-[8px] text-[var(--primary-text-color)]/60 leading-none tracking-wider">
+                            CLIENTS WORKED WITH</p>
+                    </div>
+                </div>
                 <button
                     class="group cursor-pointer mb-8 flex justify-center items-center px-1 py-1 bg-transparent border-1 border-[var(--primary-text-color)] w-40 h-12 rounded-full">
                     <p
@@ -53,15 +105,39 @@
                 </button>
                 <div class="w-auto h-auto flex justify-start items-center gap-4 mb-2">
                     <hr class="w-24 border-1 border-[var(--primary-text-color)]">
-                    <p class="font-manrope font-bold text-[var(--primary-text-color)] tracking-[8px] text-xl">RAJBEER
+                    <p class="font-clash-display font-bold text-[var(--primary-text-color)] tracking-[8px] text-xl">
+                        RAJBEER
                         SAHA</p>
                 </div>
                 <p
-                    class="p-0 -ml-[8px] leading-none font-manrope font-bold text-[120px] text-[var(--primary-text-color)] tracking-wide">
-                    DE<span class="inline-block font-manrope font-bold text-[120px] text-stroke">S</span>IGNER</p>
+                    class="scale-y-110 p-0 -ml-[8px] leading-none font-clash-display font-bold text-[120px] text-[var(--primary-text-color)] tracking-wide">
+                    DE<span class="inline-block font-clash-display font-bold text-[120px] text-stroke">S</span>IGNER
+                    <span class="absolute top-1/2 -translate-y-1/2 -right-16">
+                        <svg width="24" height="40" viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <!-- Pill-shaped mouse outline -->
+                            <rect x="1" y="1" width="22" height="38" rx="11" ry="11" fill="none" stroke="#191923"
+                                stroke-width="2" />
+                            <!-- Scroll wheel indicator -->
+                            <line x1="12" y1="12" x2="12" y2="20" stroke="#191923" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </span>
+                </p>
                 <p
-                    class="p-0 -ml-[10px] leading-none font-manrope font-bold text-[160px] text-[var(--primary-text-color)] tracking-wide">
-                    DEVELOPE<span class="inline-block font-manrope font-800 text-[160px] text-stroke">R</span></p>
+                    class="scale-y-110 p-0 -ml-[10px] leading-none font-clash-display font-bold text-[150px] text-[var(--primary-text-color)] tracking-wide">
+                    DEVELOPE<span class="inline-block font-clash-display font-bold text-[150px] text-stroke">R</span>
+                </p>
+                <div class="absolute right-[10%] top-[10%] max-h-[220px] h-full aspect-square">
+                    <p
+                        class="font-mono font-normal text-[13px] text-[var(--primary-text-color)] text-pretty hyphens-auto leading-none text-justify">
+                        I am a passionate developer and designer who brings ideas to life. I transform imagination into
+                        meaningful digital experiences, combining design thinking, curiosity, and code to create
+                        real-world UI that connects and inspires. I always seek to understand the needs of users and
+                        deliver solutions that exceed their expectations. My goal is to create products that are not
+                        only functional but also beautiful and enjoyable to use.
+                    </p>
+                </div>
             </div>
             <div class="flex flex-col justify-end items-end mb-4">
                 <button
