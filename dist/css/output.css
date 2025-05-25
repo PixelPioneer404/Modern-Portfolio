@@ -10,6 +10,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
     --spacing: 0.25rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
@@ -206,32 +207,14 @@
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
-  .top-1\/3 {
-    top: calc(1/3 * 100%);
-  }
-  .top-1\/4 {
-    top: calc(1/4 * 100%);
-  }
   .top-1\/5 {
     top: calc(1/5 * 100%);
   }
   .top-\[10\%\] {
     top: 10%;
   }
-  .top-\[calc\(50\%-20px\)\] {
-    top: calc(50% - 20px);
-  }
-  .-right-8 {
-    right: calc(var(--spacing) * -8);
-  }
   .-right-16 {
     right: calc(var(--spacing) * -16);
-  }
-  .-right-20 {
-    right: calc(var(--spacing) * -20);
-  }
-  .right-0 {
-    right: calc(var(--spacing) * 0);
   }
   .right-8 {
     right: calc(var(--spacing) * 8);
@@ -239,20 +222,11 @@
   .right-\[10\%\] {
     right: 10%;
   }
-  .bottom-0 {
-    bottom: calc(var(--spacing) * 0);
-  }
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
   .left-8 {
     left: calc(var(--spacing) * 8);
-  }
-  .z-0 {
-    z-index: 0;
-  }
-  .z-49 {
-    z-index: 49;
   }
   .z-50 {
     z-index: 50;
@@ -260,23 +234,14 @@
   .z-51 {
     z-index: 51;
   }
-  .z-100 {
-    z-index: 100;
-  }
   .m-0 {
     margin: calc(var(--spacing) * 0);
-  }
-  .mx-auto {
-    margin-inline: auto;
   }
   .my-auto {
     margin-block: auto;
   }
   .mt-16 {
     margin-top: calc(var(--spacing) * 16);
-  }
-  .-mb-2 {
-    margin-bottom: calc(var(--spacing) * -2);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -317,12 +282,6 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
-  .h-20 {
-    height: calc(var(--spacing) * 20);
-  }
-  .h-24 {
-    height: calc(var(--spacing) * 24);
-  }
   .h-\[calc\(100vh-64px\)\] {
     height: calc(100vh - 64px);
   }
@@ -331,6 +290,9 @@
   }
   .h-full {
     height: 100%;
+  }
+  .h-screen {
+    height: 100vh;
   }
   .max-h-\[220px\] {
     max-height: 220px;
@@ -347,8 +309,14 @@
   .w-full {
     width: 100%;
   }
+  .w-screen {
+    width: 100vw;
+  }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .origin-bottom {
+    transform-origin: bottom;
   }
   .origin-left {
     transform-origin: left;
@@ -356,8 +324,13 @@
   .origin-right {
     transform-origin: right;
   }
-  .origin-top-right {
-    transform-origin: top right;
+  .-translate-x-1 {
+    --tw-translate-x: calc(var(--spacing) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-translate-x-full {
     --tw-translate-x: -100%;
@@ -371,6 +344,12 @@
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .scale-100 {
+    --tw-scale-x: 100%;
+    --tw-scale-y: 100%;
+    --tw-scale-z: 100%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
   .scale-300 {
     --tw-scale-x: 300%;
     --tw-scale-y: 300%;
@@ -381,12 +360,16 @@
     --tw-scale-x: 0%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
+  .scale-y-100 {
+    --tw-scale-y: 100%;
+    scale: var(--tw-scale-x) var(--tw-scale-y);
+  }
   .scale-y-110 {
     --tw-scale-y: 110%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
-  .scale-y-120 {
-    --tw-scale-y: 120%;
+  .scale-y-200 {
+    --tw-scale-y: 200%;
     scale: var(--tw-scale-x) var(--tw-scale-y);
   }
   .-rotate-45 {
@@ -394,6 +377,9 @@
   }
   .-rotate-90 {
     rotate: calc(90deg * -1);
+  }
+  .rotate-45 {
+    rotate: 45deg;
   }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
@@ -464,6 +450,9 @@
   .bg-\[var\(--primary-text-color\)\] {
     background-color: var(--primary-text-color);
   }
+  .bg-red-500 {
+    background-color: var(--color-red-500);
+  }
   .bg-transparent {
     background-color: transparent;
   }
@@ -473,29 +462,14 @@
   .px-1 {
     padding-inline: calc(var(--spacing) * 1);
   }
-  .px-2 {
-    padding-inline: calc(var(--spacing) * 2);
-  }
-  .px-3 {
-    padding-inline: calc(var(--spacing) * 3);
-  }
-  .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
-  }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
-  }
-  .px-6 {
-    padding-inline: calc(var(--spacing) * 6);
   }
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
   }
   .py-1 {
     padding-block: calc(var(--spacing) * 1);
-  }
-  .py-2 {
-    padding-block: calc(var(--spacing) * 2);
   }
   .pb-4 {
     padding-bottom: calc(var(--spacing) * 4);
@@ -537,32 +511,20 @@
   .text-\[8px\] {
     font-size: 8px;
   }
-  .text-\[10px\] {
-    font-size: 10px;
-  }
   .text-\[12px\] {
     font-size: 12px;
   }
   .text-\[13px\] {
     font-size: 13px;
   }
-  .text-\[20px\] {
-    font-size: 20px;
-  }
   .text-\[40px\] {
     font-size: 40px;
-  }
-  .text-\[110px\] {
-    font-size: 110px;
   }
   .text-\[120px\] {
     font-size: 120px;
   }
   .text-\[150px\] {
     font-size: 150px;
-  }
-  .text-\[160px\] {
-    font-size: 160px;
   }
   .leading-none {
     --tw-leading: 1;
@@ -688,10 +650,19 @@
       }
     }
   }
-  .hover\:text-\[var\(--bg-color\)\] {
+  .hover\:scale-y-150 {
     &:hover {
       @media (hover: hover) {
-        color: var(--bg-color);
+        --tw-scale-y: 150%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
+  .hover\:scale-y-200 {
+    &:hover {
+      @media (hover: hover) {
+        --tw-scale-y: 200%;
+        scale: var(--tw-scale-x) var(--tw-scale-y);
       }
     }
   }
@@ -701,6 +672,14 @@
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #191923;
     -webkit-text-fill-color: transparent;
+  }
+  .bg-pattern-1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+    background: linear-gradient(45deg, #000000 25%, transparent 25%), linear-gradient(-135deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000);
+    background-size: 50px 50px;
   }
 }
 @property --tw-translate-x {
