@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajbeer Saha | Portfolio</title>
     <link rel="stylesheet" href="/css/output.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 </head>
 
 <body class="bg-[var(--bg-color)] select-none">
     <div class="absolute right-8 top-1/5 origin-right flex justify-center items-center gap-4 -rotate-90">
         <div
-            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] scale-100 hover:scale-y-150 origin-bottom transition-all duration-300 ease-in-out">
+            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
             <a href="https://www.linkedin.com/in/rajbeer-saha-123456789/" class="decoration-none"
                 target="_blank">LINKEDIN</a>
         </div>
         <div
-            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] scale-100 hover:scale-y-150 origin-bottom transition-all duration-300 ease-in-out">
+            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
             <a href="https://www.instagram.com/raj_vir202" class="decoration-none" target="_blank">INSTAGRAM</a>
         </div>
         <div
-            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] scale-100 hover:scale-y-150 origin-bottom transition-all duration-300 ease-in-out">
+            class="font-satoshi font-semibold text-[12px] text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
             <a href="https://github.com/pixelpioneer404" class="decoration-none" target="_blank">GITHUB</a>
         </div>
     </div>
@@ -33,7 +34,7 @@
 
             <!-- 2. Centered links -->
             <ul class="flex justify-center gap-6 w-full">
-                <li><a href="#" class="relative group inline-block decoration-none">
+                <li><a class="cursor-pointer scroll-to-work relative group inline-block decoration-none">
                         <div
                             class="absolute inset-0 border-b-1 border-[var(--primary-text-color)] scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
                         </div>
@@ -113,14 +114,20 @@
                         </svg>
                     </span>
                 </button>
-                <div class="w-auto h-auto flex justify-start items-center gap-4 mb-2">
-                    <hr class="w-24 border-1 border-[var(--primary-text-color)]">
-                    <p class="font-clash-display font-bold text-[var(--primary-text-color)] tracking-[8px] text-xl">
+                <div class="w-auto h-auto flex justify-start items-center gap-4 mb-2 relative">
+                    <!-- <hr class="w-24 border-1 border-[var(--primary-text-color)]"> -->
+                    <div id="my-name-string" class="w-24 h-24 absolute">
+                        <svg width="96px" height="96px">
+                            <path d="M 0 48 Q 48 48 96 48" stroke="#191923" stroke-width="2" fill="transparent" />
+                        </svg>
+                    </div>
+                    <p class="ml-28 font-clash-display font-bold text-[var(--primary-text-color)] tracking-[8px] text-xl">
                         RAJBEER
                         SAHA</p>
                 </div>
+                <!--I did pointer events none to the designer text so that it can't interupt between my string animation-->
                 <p
-                    class="scale-y-110 p-0 -ml-[8px] leading-none font-clash-display font-bold text-[120px] text-[var(--primary-text-color)] tracking-wide">
+                    class="pointer-events-none scale-y-110 p-0 -ml-[8px] leading-none font-clash-display font-bold text-[120px] text-[var(--primary-text-color)] tracking-wide">
                     DE<span class="inline-block font-clash-display font-bold text-[120px] text-stroke">S</span>IGNER
                     <span class="absolute top-1/2 -translate-y-1/2 -right-16">
                         <svg width="24" height="40" viewBox="0 0 24 40" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +161,7 @@
             </div>
             <div class="flex flex-col justify-end items-end mb-4">
                 <button
-                    class="group cursor-pointer flex justify-center items-center w-full aspect-square rounded-full bg-[var(--primary-text-color)]">
+                    class="scroll-to-work group cursor-pointer flex justify-center items-center w-full aspect-square rounded-full bg-[var(--primary-text-color)]">
                     <svg class="-rotate-45 group-hover:rotate-90 transition-all scale-300 duration-300 ease-in-out"
                         xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px"
                         fill="#edede9">
@@ -165,19 +172,765 @@
         </section>
         <section id="works" class="worksSection pt-16 p-8 h-screen overflow-hidden">
             <!-- inner wrapper has no extra padding -->
-            <div class="wrapper flex gap-8 items-center h-full">
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
-                <div class="h-full min-w-[35vw] bg-red-900"></div>
+            <div class="wrapper flex gap-8 items-center h-full snap-x">
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404/Portfolio_Website" class="decoration-none"
+                            target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="https://portfolio.pixelpioneer.tech" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Personal<br>Portfolio</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A showcase of my work and projects, demonstrating my skills and creativity as a developer
+                            and designer. This is the first portfolio I had developed in my developer journey.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">Feb 28, 2025</p>
+                        <div class="w-[calc(100%-80px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com/" class="decoration-none" target="_blank">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org/" class="decoration-none" target="_blank">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404" class="decoration-none" target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="https://tictactoe.pixelpioneer.tech" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Tic-Tac-Toe<br>Game</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A simple but competative tic-tac-toe game that allows you to play against computer and also
+                            against your friends, simple, fun and interactive.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">Mar 10, 2025</p>
+                        <div class="w-[calc(100%-80px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404" class="decoration-none" target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="#" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Bubble<br></h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A sleek and minimal task manangement app designed with modern aesthetics, offering all the
+                            essential features for steamlined productivity.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">Mar 26, 2025</p>
+                        <div class="w-[calc(100%-80px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404/Portfolio_Website" class="decoration-none"
+                            target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="https://portfolio.pixelpioneer.tech" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Codigo</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A minimal yet powerful competative coding platform designed to enhance your problem-solving
+                            skills though a clean and focused interface
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">May 15, 2025</p>
+                        <div class="w-[calc(100%-100px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                            <a href="https://expressjs.com" class="decoration-none">
+                                <span
+                                    class="work-card-span flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative items-center">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Express--Streamline-Simple-Icons"
+                                        height="14" width="14">
+                                        <desc>
+                                            Express Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Express</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="M24 18.588a1.529 1.529 0 0 1 -1.895 -0.72l-3.45 -4.771 -0.5 -0.667 -4.003 5.444a1.466 1.466 0 0 1 -1.802 0.708l5.158 -6.92 -4.798 -6.251a1.595 1.595 0 0 1 1.9 0.666l3.576 4.83 3.596 -4.81a1.435 1.435 0 0 1 1.788 -0.668L21.708 7.9l-2.522 3.283a0.666 0.666 0 0 0 0 0.994l4.804 6.412zM0.002 11.576l0.42 -2.075c1.154 -4.103 5.858 -5.81 9.094 -3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C0.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 0 0 2.582 -2.876c0.207 -0.666 0.548 -0.78 1.174 -0.588a5.417 5.417 0 0 1 -2.589 3.957 6.272 6.272 0 0 1 -7.306 -0.933 6.575 6.575 0 0 1 -1.64 -3.858c0 -0.235 -0.08 -0.455 -0.134 -0.666A88.33 88.33 0 0 1 0 11.577zm1.127 -0.286h9.654c-0.06 -3.076 -2.001 -5.258 -4.59 -5.278 -2.882 -0.04 -4.944 2.094 -5.071 5.264z"
+                                            fill="#edede9" stroke-width="3"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Express.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404" class="decoration-none" target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="#" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        PragatiPath</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A user-friendly e-learning platform designed to empower farmers by leveraging modern
+                            internet connectivity and the power of AI.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">May 28, 2025</p>
+                        <div class="w-[calc(100%-100px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                            <a href="https://expressjs.com" class="decoration-none">
+                                <span
+                                    class="work-card-span flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative items-center">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Express--Streamline-Simple-Icons"
+                                        height="14" width="14">
+                                        <desc>
+                                            Express Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Express</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="M24 18.588a1.529 1.529 0 0 1 -1.895 -0.72l-3.45 -4.771 -0.5 -0.667 -4.003 5.444a1.466 1.466 0 0 1 -1.802 0.708l5.158 -6.92 -4.798 -6.251a1.595 1.595 0 0 1 1.9 0.666l3.576 4.83 3.596 -4.81a1.435 1.435 0 0 1 1.788 -0.668L21.708 7.9l-2.522 3.283a0.666 0.666 0 0 0 0 0.994l4.804 6.412zM0.002 11.576l0.42 -2.075c1.154 -4.103 5.858 -5.81 9.094 -3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C0.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 0 0 2.582 -2.876c0.207 -0.666 0.548 -0.78 1.174 -0.588a5.417 5.417 0 0 1 -2.589 3.957 6.272 6.272 0 0 1 -7.306 -0.933 6.575 6.575 0 0 1 -1.64 -3.858c0 -0.235 -0.08 -0.455 -0.134 -0.666A88.33 88.33 0 0 1 0 11.577zm1.127 -0.286h9.654c-0.06 -3.076 -2.001 -5.258 -4.59 -5.278 -2.882 -0.04 -4.944 2.094 -5.071 5.264z"
+                                            fill="#edede9" stroke-width="3"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Express.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404" class="decoration-none" target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="#" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Music Player</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A beautifully crafted, minimal, and aesthetic open source music player that delivers all the
+                            essentials for an immersive listening experience.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">Upcoming</p>
+                        <div class="w-[calc(100%-100px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                            <a href="https://expressjs.com" class="decoration-none">
+                                <span
+                                    class="work-card-span flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative items-center">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Express--Streamline-Simple-Icons"
+                                        height="14" width="14">
+                                        <desc>
+                                            Express Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Express</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="M24 18.588a1.529 1.529 0 0 1 -1.895 -0.72l-3.45 -4.771 -0.5 -0.667 -4.003 5.444a1.466 1.466 0 0 1 -1.802 0.708l5.158 -6.92 -4.798 -6.251a1.595 1.595 0 0 1 1.9 0.666l3.576 4.83 3.596 -4.81a1.435 1.435 0 0 1 1.788 -0.668L21.708 7.9l-2.522 3.283a0.666 0.666 0 0 0 0 0.994l4.804 6.412zM0.002 11.576l0.42 -2.075c1.154 -4.103 5.858 -5.81 9.094 -3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C0.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 0 0 2.582 -2.876c0.207 -0.666 0.548 -0.78 1.174 -0.588a5.417 5.417 0 0 1 -2.589 3.957 6.272 6.272 0 0 1 -7.306 -0.933 6.575 6.575 0 0 1 -1.64 -3.858c0 -0.235 -0.08 -0.455 -0.134 -0.666A88.33 88.33 0 0 1 0 11.577zm1.127 -0.286h9.654c-0.06 -3.076 -2.001 -5.258 -4.59 -5.278 -2.882 -0.04 -4.944 2.094 -5.071 5.264z"
+                                            fill="#edede9" stroke-width="3"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Express.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="h-full min-w-[35vw] bg-[var(--primary-text-color)] rounded-4xl relative p-12 flex flex-col items-start justify-start gap-3 snap-center">
+                    <span class="absolute top-1 right-4" id="github-icon">
+                        <a href="https://github.com/PixelPioneer404" class="decoration-none" target="_blank">
+                            <i class="ri-github-fill text-[var(--bg-color)] text-[40px]"></i>
+                        </a>
+                    </span>
+                    <div class="absolute bottom-4 right-4">
+                        <a href="#" class="decoration-none" target="_blank">
+                            <button title="Live preview"
+                                class="group cursor-pointer flex justify-center items-center w-35 aspect-square rounded-full bg-[var(--bg-color)]">
+                                <svg class="-rotate-45 group-hover:rotate-0 transition-all scale-280 duration-300 ease-in-out"
+                                    xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960"
+                                    width="48px" fill="#191923">
+                                    <path d="M686-450H160v-60h526L438-758l42-42 320 320-320 320-42-42 248-248Z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </div>
+                    <h1 class="font-satoshi font-[800] text-[60px] text-[var(--bg-color)] tracking-wider leading-20">
+                        Chess Board</h1>
+                    <span class="w-[90%] h-[20%]">
+                        <p
+                            class="font-mono font-normal text-base text-[var(--bg-color)] text-pretty hyphens-auto text-left">
+                            A competetive online chess platform crafted with a polished, modern UI to deliver a seamless
+                            and engaging experience for players of all levels.
+                        </p>
+                    </span>
+                    <div class="mt-auto flex flex-col justify-center items-start gap-4">
+                        <p class="font-mono font-normal text-sm text-[var(--bg-color)]">upcoming</p>
+                        <div class="w-[calc(100%-100px)] h-auto flex justify-start items-center gap-3 flex-wrap -ml-2">
+                            <a href="https://react.dev" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="z-0 w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-reactjs-line z-51 text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="z-51 text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        React</p>
+                                </span>
+                            </a>
+                            <a href="https://vite.dev" class="decoration-none" target="_blank">
+                                <span
+                                    class="work-card-span flex items-center gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Vite--Streamline-Simple-Icons"
+                                        height="12" width="12">
+                                        <desc>
+                                            Vite Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Vite</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="m8.286 10.578 0.512 -8.657a0.306 0.306 0 0 1 0.247 -0.282L17.377 0.006a0.306 0.306 0 0 1 0.353 0.385l-1.558 5.403a0.306 0.306 0 0 0 0.352 0.385l2.388 -0.46a0.306 0.306 0 0 1 0.332 0.438l-6.79 13.55 -0.123 0.19a0.294 0.294 0 0 1 -0.252 0.14c-0.177 0 -0.35 -0.152 -0.305 -0.369l1.095 -5.301a0.306 0.306 0 0 0 -0.388 -0.355l-1.433 0.435a0.306 0.306 0 0 1 -0.389 -0.354l0.69 -3.375a0.306 0.306 0 0 0 -0.37 -0.36l-2.32 0.536a0.306 0.306 0 0 1 -0.374 -0.316zm14.976 -7.926L17.284 3.74l-0.544 1.887 2.077 -0.4a0.8 0.8 0 0 1 0.84 0.369 0.8 0.8 0 0 1 0.034 0.783L12.9 19.93l-0.013 0.025 -0.015 0.023 -0.122 0.19a0.801 0.801 0 0 1 -0.672 0.37 0.826 0.826 0 0 1 -0.634 -0.302 0.8 0.8 0 0 1 -0.16 -0.67l1.029 -4.981 -1.12 0.34a0.81 0.81 0 0 1 -0.86 -0.262 0.802 0.802 0 0 1 -0.165 -0.67l0.63 -3.08 -2.027 0.468a0.808 0.808 0 0 1 -0.768 -0.233 0.81 0.81 0 0 1 -0.217 -0.6l0.389 -6.57 -7.44 -1.33a0.612 0.612 0 0 0 -0.64 0.906L11.58 23.691a0.612 0.612 0 0 0 1.066 -0.004l11.26 -20.135a0.612 0.612 0 0 0 -0.644 -0.9z"
+                                            fill="#edede9" stroke-width="1"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Vite</p>
+                                </span>
+                            </a>
+                            <a href="https://tailwindcss.com" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-tailwind-css-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Tailwind</p>
+                                </span>
+                            </a>
+                            <a href="https://nodejs.org" class="decoration-none">
+                                <span
+                                    class="flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <i
+                                        class="ri-nodejs-fill text-sm relative text-[var(--bg-color)] group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out"></i>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Node.js</p>
+                                </span>
+                            </a>
+                            <a href="https://expressjs.com" class="decoration-none">
+                                <span
+                                    class="work-card-span flex gap-1 px-2 py-1 rounded-full bg-transparent border-1 border-[var(--bg-color)] overflow-hidden group relative items-center">
+                                    <div
+                                        class="w-full h-full bg-[var(--bg-color)] absolute inset-0 scale-x-0 origin-left group-hover:scale-x-100 transition-all duration-300 ease-in-out">
+                                    </div>
+                                    <svg class="z-51 relative" role="img" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg" id="Express--Streamline-Simple-Icons"
+                                        height="14" width="14">
+                                        <desc>
+                                            Express Streamline Icon: https://streamlinehq.com
+                                        </desc>
+                                        <title>Express</title>
+                                        <path class="transition-all duration-300 ease-in-out"
+                                            d="M24 18.588a1.529 1.529 0 0 1 -1.895 -0.72l-3.45 -4.771 -0.5 -0.667 -4.003 5.444a1.466 1.466 0 0 1 -1.802 0.708l5.158 -6.92 -4.798 -6.251a1.595 1.595 0 0 1 1.9 0.666l3.576 4.83 3.596 -4.81a1.435 1.435 0 0 1 1.788 -0.668L21.708 7.9l-2.522 3.283a0.666 0.666 0 0 0 0 0.994l4.804 6.412zM0.002 11.576l0.42 -2.075c1.154 -4.103 5.858 -5.81 9.094 -3.27 1.895 1.489 2.368 3.597 2.275 5.973H1.116C0.943 16.447 4.005 19.009 7.92 17.7a4.078 4.078 0 0 0 2.582 -2.876c0.207 -0.666 0.548 -0.78 1.174 -0.588a5.417 5.417 0 0 1 -2.589 3.957 6.272 6.272 0 0 1 -7.306 -0.933 6.575 6.575 0 0 1 -1.64 -3.858c0 -0.235 -0.08 -0.455 -0.134 -0.666A88.33 88.33 0 0 1 0 11.577zm1.127 -0.286h9.654c-0.06 -3.076 -2.001 -5.258 -4.59 -5.278 -2.882 -0.04 -4.944 2.094 -5.071 5.264z"
+                                            fill="#edede9" stroke-width="3"></path>
+                                    </svg>
+                                    <p
+                                        class="text-sm relative text-[var(--bg-color)] font-normal font-manrope group-hover:text-[var(--primary-text-color)] transition-all duration-300 ease-in-out">
+                                        Express.js</p>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <section id="services" class="h-screen pt-8 p-8 bg-red-800"></section>
+        <section id="services" class="h-screen mt-16 pt-8 p-8 bg-red-800"></section>
     </main>
 
     <!-- Your horizontal-scroll script -->
