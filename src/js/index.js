@@ -191,6 +191,8 @@ function btnEnters() { //go to line 233
     })
 }
 
+var DDSBtimeline = gsap.timeline() //DDS means "Designer | Developer | Socials | Book a call timeline"
+
 const DESIGNERtxtContainer = document.querySelector("#DESIGNER-txt-container")
 var DesignerTxt = DESIGNERtxtContainer.innerText
 var eachEl1 = DesignerTxt.split("")
@@ -211,12 +213,12 @@ eachEl1.forEach((el, i) => {
     DESIGNERtxtContainer.innerHTML = clutter1
 })
 
-gsap.from("#DESIGNER-txt-container span", {
+DDSBtimeline.from("#DESIGNER-txt-container span", {
     y: 120,
     opacity: 0,
     duration: 0.5,
     stagger: 0.1
-})
+}, 0)
 
 DEVELOPERtxtContainer.textContent = ""
 eachEl2.forEach((el, i) => {
@@ -228,25 +230,33 @@ eachEl2.forEach((el, i) => {
     DEVELOPERtxtContainer.innerHTML = clutter2
 })
 
-gsap.from("#DEVELOPER-txt-container span", {
+DDSBtimeline.from("#DEVELOPER-txt-container span", {
     y: 120,
     opacity: 0,
     duration: 0.5,
     stagger: 0.1
-})
+}, 0)
+
+const bookACallTxt = document.querySelector("#book-a-call-txt")
+const bookACallIcon = document.querySelector("#book-a-call-icon")
+DDSBtimeline.from(bookACallTxt, { opacity: 0, duration: 1.2, ease: "power1.inOut" }, 0)
+DDSBtimeline.from(bookACallIcon, {
+    x: -112,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power1.inOut"
+}, 0)
 
 const socialLabels = document.querySelectorAll(".social-label")
-function animateSocialLabels() {
-    gsap.from(socialLabels, {
-        translateY: "200%",
-        opacity: 0,
-        duration: 0.5,
-        stagger: {
-            each: 0.2,
-            from: "end"   // ← now it will animate indexes [2,1,0] instead of [0,1,2]
-        }
-    });
-}
+DDSBtimeline.from(socialLabels, {
+    translateY: "200%",
+    opacity: 0,
+    duration: 0.5,
+    stagger: {
+        each: 0.2,
+        from: "end"   // ← now it will animate indexes [2,1,0] instead of [0,1,2]
+    }
+})
 
 const navName = document.querySelector("#nav-name")
 const navItems = document.querySelectorAll(".nav-item")
@@ -270,3 +280,46 @@ function animateNav() {
         stagger: 0.3
     })
 }
+
+function showNav() {
+    gsap.to("header", {
+        top: "0%",
+        duration: 0.5,
+        ease: "power1.inOut"
+    })
+}
+
+function hideNav() {
+    gsap.to("header", {
+        top: "-100%",
+        duration: 0.5,
+        ease: "power1.inOut"
+    })
+}
+
+ScrollTrigger.create({
+    trigger: "#works",
+    start: "bottom top",
+    end: "+=500%",
+    scrub: 1,
+    onToggle: self => {
+        if (self.isActive) {
+            hideNav()
+        } else {
+            showNav()
+        }
+    }
+})
+
+const servicesSections = document.querySelectorAll(".services")
+
+servicesSections.forEach((section) => {
+    ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: "+=100%", //100% means full viewport height
+        pin: true,
+        pinSpacing: false,
+        // anticipatePin: 2,  // Helps with smoother pinning
+    })
+})
