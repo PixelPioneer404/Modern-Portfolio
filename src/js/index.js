@@ -1,7 +1,19 @@
+import Lenis from "lenis"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin"
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin)
+
+// Initialize Lenis
+const lenis = new Lenis()
+
+// Use requestAnimationFrame to continuously update the scroll
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
 
 window.onload = () => {
     // animateNav()
@@ -29,6 +41,34 @@ const scrollDistance = totalWidth - visibleWidth;
 // 5) give page enough vertical scroll space
 // document.body.style.height = `${scrollDistance + window.innerHeight}px`;
 
+const worksUnderline = document.querySelector("#works-underline")
+const worksUnderlineParent = document.querySelector(".scroll-to-work")
+let isWorkActive = false
+
+function animateWorksUnderline() {
+    if (isWorkActive) {
+        gsap.to(worksUnderline, {
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    } else {
+        gsap.to(worksUnderline, {
+            scaleX: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+}
+worksUnderlineParent.addEventListener("mouseenter", () => {
+    isWorkActive = true
+    animateWorksUnderline()
+})
+worksUnderlineParent.addEventListener("mouseleave", () => {
+    isWorkActive = false
+    animateWorksUnderline()
+})
+
 // 6) animate the wrapper instead of the panels array
 gsap.to(wrapper, {
     x: () => `-${scrollDistance}px`,
@@ -39,7 +79,17 @@ gsap.to(wrapper, {
         end: () => `+=${scrollDistance}`,
         scrub: true,
         pin: true,
-        pinSpacing: true
+        pinSpacing: true,
+        onToggle: self => {
+            if (self.isActive) {
+                isWorkActive = true
+                animateWorksUnderline()
+            }
+            else {
+                isWorkActive = false;
+                animateWorksUnderline()
+            }
+        }
     }
 });
 
@@ -91,12 +141,19 @@ stringContainer.addEventListener("mouseleave", () => {
 })
 
 const scrollDownCueBtn = document.querySelectorAll(".scroll-to-work") //for the scroll-cue and work nav-item
+const scrollToServices = document.querySelector(".scroll-to-services")
 
 scrollDownCueBtn.forEach((el) => {
     el.addEventListener("click", () => {
         document.querySelector("#works").scrollIntoView({
             behavior: "smooth"
         })
+    })
+})
+
+scrollToServices.addEventListener("click", () => {
+    document.querySelector("#services").scrollIntoView({
+        behavior: "smooth"
     })
 })
 
@@ -258,29 +315,6 @@ DDSBtimeline.from(socialLabels, {
     }
 })
 
-const navName = document.querySelector("#nav-name")
-const navItems = document.querySelectorAll(".nav-item")
-const navBtn = document.querySelector("#resume")
-
-function animateNav() {
-    gsap.from(navName, {
-        left: "-10%",
-        duration: 1,
-        ease: "power1.inOut",
-    })
-    gsap.from(navBtn, {
-        right: "-10%",
-        duration: 1,
-        ease: "power1.inOut",
-    })
-    gsap.from(navItems, {
-        yPercent: -200,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.3
-    })
-}
-
 function showNav() {
     gsap.to("header", {
         top: "0%",
@@ -297,7 +331,7 @@ function hideNav() {
     })
 }
 
-ScrollTrigger.create({
+ScrollTrigger.create({ //this is for the nav control on services section
     trigger: "#works",
     start: "bottom top",
     end: "+=500%",
@@ -305,10 +339,12 @@ ScrollTrigger.create({
     onToggle: self => {
         if (self.isActive) {
             hideNav()
+            showServiceNav()
         } else {
-            showNav()
+            hideServiceNav()
         }
-    }
+    },
+    onLeaveBack: () => showNav(), // show nav when scrolling back up
 })
 
 const servicesSections = document.querySelectorAll(".services")
@@ -319,7 +355,71 @@ servicesSections.forEach((section) => {
         start: "top top",
         end: "+=100%", //100% means full viewport height
         pin: true,
-        pinSpacing: false,
-        // anticipatePin: 2,  // Helps with smoother pinning
+        pinSpacing: false// Helps with smoother pinning
     })
 })
+
+const serviceNav = document.querySelector("#service-nav")
+
+function showServiceNav() {
+    gsap.to(serviceNav, {
+        opacity: 1,
+        top: 0,
+        duration: 0.5,
+        ease: "power1.inOut"
+    })
+}
+
+function hideServiceNav() {
+    gsap.to(serviceNav, {
+        opacity: 0,
+        top: "-100%",
+        duration: 0.5,
+        ease: "power1.inOut"
+    })
+}
+
+// calculate transform-origin so zoom focuses on the center of the “O”
+function setTransformOriginToO() {
+    const section = document.querySelector('#blog-header');
+    const oSpan = document.querySelector('.o-letter');
+
+    const secRect = section.getBoundingClientRect();
+    const oRect = oSpan.getBoundingClientRect();
+
+    const originX = ((oRect.left + oRect.right) / 2 - secRect.left) / secRect.width * 100;
+    const originY = ((oRect.top + oRect.bottom) / 2 - secRect.top) / secRect.height * 100;
+
+    gsap.set(section, { transformOrigin: `${originX}% ${originY}%` });
+}
+
+// run on load and also on resize (in case layout shifts)
+window.addEventListener('load', setTransformOriginToO);
+window.addEventListener('resize', setTransformOriginToO);
+
+// build the ScrollTrigger timeline
+const blogSectiontl = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#blog",
+        start: "top top",
+        end: "+=600%",       // adjust this value to control how much scroll it takes to fully zoom
+        scrub: 1,
+        pin: true,
+        onLeave: () => showNav(), // show nav when leaving the blog section
+        onEnterBack: () => hideNav() // hide nav when entering back into the blog section
+    }
+});
+
+// 1) zoom way in (tweak the scale to taste)
+blogSectiontl.to("#blog-header", {
+    scale: 150,
+    ease: "none"
+});
+
+// 2) once the text has zoomed completely out, fade in the inner content
+//    we stagger this so it happens near the end of the scroll
+blogSectiontl.to("#blog-content", {
+    opacity: 1,
+    ease: "none",
+    duration: 0.2
+}, "-=200%");  // start this tween 200% before the end of the timeline
