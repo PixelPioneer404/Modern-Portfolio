@@ -2,6 +2,8 @@ import Lenis from "lenis"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin"
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin)
 
 // Initialize Lenis
@@ -20,6 +22,7 @@ window.onload = () => {
     // animateSocialLabels()
     updateStatsOnLoad()
     // btnEnters()
+    setupBlogNavigation() // Add blog navigation setup
 }
 
 // 1) grab section + wrapper
@@ -346,6 +349,7 @@ ScrollTrigger.create({ //this is for the nav control on services section
             hideServiceNav()
         }
     },
+    onLeave: () => showNav(), // show nav when scrolling down
     onLeaveBack: () => showNav(), // show nav when scrolling back up
 })
 
@@ -381,3 +385,299 @@ function hideServiceNav() {
     })
 }
 
+//blog section nav underline animation
+const blogUnderline = document.querySelector("#blog-underline")
+const blogUnderlineParent = document.querySelector(".scroll-to-blog")
+let isBlogActive = false
+
+function animateBlogUnderline() {
+    if (isBlogActive) {
+        gsap.to(blogUnderline, {
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    } else {
+        gsap.to(blogUnderline, {
+            scaleX: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+}
+blogUnderlineParent.addEventListener("click", () => {
+    document.querySelector("#blog").scrollIntoView({
+        behavior: "smooth"
+    })
+})
+blogUnderlineParent.addEventListener("mouseenter", () => {
+    if (!isBlogActive) {
+        gsap.to(blogUnderline, {
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+})
+blogUnderlineParent.addEventListener("mouseleave", () => {
+    if (!isBlogActive) {
+        gsap.to(blogUnderline, {
+            scaleX: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+})
+
+ScrollTrigger.create({
+    trigger: "#blog",
+    start: "top top",
+    end: "bottom top",
+    scrub: true,
+    onToggle: self => {
+        if (self.isActive) {
+            isBlogActive = true;
+            showNav();
+            setTimeout(animateBlogUnderline, 400); // Delay to ensure the underline animation is smooth
+        } else {
+            isBlogActive = false;
+            animateBlogUnderline();
+        }
+    },
+})
+
+// Blog Header Navigation - moved to function for proper initialization
+function setupBlogNavigation() {
+    console.log("🚀 Setting up blog navigation..."); // Debug log
+    const blogHeader = document.querySelector("#blog-header");
+    if (!blogHeader) {
+        console.error("Blog header not found!");
+        return;
+    }
+    
+    console.log("Blog header found:", blogHeader); // Debug log
+    const blogHeaderItems = blogHeader.querySelectorAll("a");
+    console.log("Found blog header items:", blogHeaderItems.length); // Debug log
+
+    let activeNavItem = null;
+    let currentActiveContent = null;
+
+    // Debug: Log all available content div IDs
+    const allContentDivs = document.querySelectorAll("#blog-content > div");
+    console.log("Available content div IDs:", Array.from(allContentDivs).map(div => div.id));
+
+    // Debug: Log all nav item text content
+    console.log("Nav items text content:", Array.from(blogHeaderItems).map((item, index) => {
+        const rawText = item.textContent;
+        const normalizedText = rawText.trim().replace(/\s+/g, ' ');
+        return `${index}: raw="${rawText}" normalized="${normalizedText}"`;
+    }));
+
+    // Function to switch blog content based on nav item
+    function switchBlogContent(sectionName) {
+        console.log("switchBlogContent called with:", `"${sectionName}"`); // Debug log
+        const targetContent = document.getElementById(sectionName);
+        console.log("Found element:", targetContent); // Debug log
+
+        if (!targetContent) {
+            console.error(`No element found with ID: "${sectionName}"`);
+            return;
+        }
+        
+        if (currentActiveContent === targetContent) return;
+
+        if (currentActiveContent) {
+            // Fade out current content
+            gsap.to(currentActiveContent, {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    currentActiveContent.style.display = "none";
+
+                    // Show and fade in new content
+                    targetContent.style.display = "flex";
+                    gsap.fromTo(targetContent,
+                        { opacity: 0 },
+                        {
+                            opacity: 1,
+                            duration: 0.3,
+                            ease: "power2.out"
+                        }
+                    );
+                    currentActiveContent = targetContent;
+                }
+            });
+        } else {
+            // First time - just show the content
+            targetContent.style.display = "flex";
+            gsap.fromTo(targetContent,
+                { opacity: 0 },
+                {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                }
+            );
+            currentActiveContent = targetContent;
+        }
+    }
+
+    // Enhanced setActiveNavItem function to include content switching
+    function setActiveNavItem(targetItem) {
+        // Get the section name from the clicked nav item and normalize it
+        let sectionName = targetItem.textContent.trim();
+        // Replace any whitespace sequences (including newlines) with single spaces
+        sectionName = sectionName.replace(/\s+/g, ' ');
+        console.log("setActiveNavItem called with:", `"${sectionName}"`); // Debug log
+
+        // Reset previous active item styles
+        if (activeNavItem && activeNavItem !== targetItem) {
+            gsap.to(activeNavItem, {
+                backgroundColor: "transparent",
+                border: "1px solid transparent",
+                color: "#191923",
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        }
+
+        // Set new active item
+        activeNavItem = targetItem;
+
+        // Apply active styles to the target item
+        gsap.to(targetItem, {
+            backgroundColor: "#191923",
+            color: "#edede9",
+            duration: 0.3,
+            ease: "power2.out"
+        });
+
+        // Switch blog content
+        switchBlogContent(sectionName);
+    }
+
+    blogHeaderItems.forEach((item, index) => {
+        console.log(`Setting up nav item ${index}:`, item.textContent.trim(), "with classes:", Array.from(item.classList)); // Debug log
+        
+        // Click handler for active state
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log(`Nav item ${index} clicked:`, item.textContent.trim()); // Debug log
+            setActiveNavItem(item);
+        });
+
+        // Hover effects (only apply to non-active items)
+        item.addEventListener("mouseenter", () => {
+            if (item !== activeNavItem) {
+                gsap.to(item, {
+                    border: "1px solid #191923",
+                    duration: 0.2,
+                    ease: "power1.inOut"
+                });
+            }
+        });
+
+        item.addEventListener("mouseleave", () => {
+            if (item !== activeNavItem) {
+                gsap.to(item, {
+                    border: "1px solid transparent",
+                    duration: 0.2,
+                    ease: "power1.inOut"
+                });
+            }
+        });
+    });
+
+    // Initialize with first item active (optional)
+    if (blogHeaderItems.length > 0) {
+        setActiveNavItem(blogHeaderItems[0]);
+    }
+
+    // Initialize first content section
+    const firstContent = document.getElementById("ALL");
+    if (firstContent) {
+        currentActiveContent = firstContent;
+        firstContent.style.display = "flex";
+    }
+}
+
+//three js globe
+const canvas = document.querySelector("#globe-canvas")
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+scene.add(camera)
+camera.position.z = 3.6;
+
+// === Create Globe Lines ===
+const radius = 2;
+const latSegments = 20;
+const lonSegments = 20;
+const lineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+
+// Latitude Lines (horizontal rings)
+for (let i = 1; i < latSegments; i++) {
+    const theta = (i / latSegments) * Math.PI;
+    const ringRadius = radius * Math.sin(theta);
+    const y = radius * Math.cos(theta);
+
+    const ringPoints = [];
+    const points = 64; // smooth ring
+
+    for (let j = 0; j <= points; j++) {
+        const phi = (j / points) * 2 * Math.PI;
+        const x = ringRadius * Math.cos(phi);
+        const z = ringRadius * Math.sin(phi);
+        ringPoints.push(new THREE.Vector3(x, y, z));
+    }
+
+    const geometry = new THREE.BufferGeometry().setFromPoints(ringPoints);
+    const ring = new THREE.LineLoop(geometry, lineMaterial);
+    scene.add(ring);
+}
+
+// Longitude Lines (vertical curves)
+for (let i = 0; i < lonSegments; i++) {
+    const phi = (i / lonSegments) * 2 * Math.PI;
+    const curvePoints = [];
+
+    for (let j = 0; j <= 64; j++) {
+        const theta = (j / 64) * Math.PI;
+        const x = radius * Math.sin(theta) * Math.cos(phi);
+        const y = radius * Math.cos(theta);
+        const z = radius * Math.sin(theta) * Math.sin(phi);
+        curvePoints.push(new THREE.Vector3(x, y, z));
+    }
+
+    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+    const curve = new THREE.Line(geometry, lineMaterial);
+    scene.add(curve);
+}
+
+const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true })
+renderer.setClearColor(0x000000, 0); // transparent background
+renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+
+window.addEventListener("resize", () => {
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
+})
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05
+controls.enableZoom = false;
+controls.enablePan = false;
+controls.autoRotate = true;
+controls.autoRotateSpeed = 2;
+
+function animate() {
+    window.requestAnimationFrame(animate)
+    controls.update();
+    renderer.render(scene, camera)
+}
+animate()
