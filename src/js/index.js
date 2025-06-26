@@ -148,6 +148,8 @@ scrollDownCueBtn.forEach((el) => {
         document.querySelector("#works").scrollIntoView({
             behavior: "smooth"
         })
+        isWorkActive = true;
+        animateWorksUnderline();
     })
 })
 
@@ -263,7 +265,7 @@ var clutter2 = ""
 DESIGNERtxtContainer.textContent = ""
 eachEl1.forEach((el, i) => {
     if (i === 2) {
-        clutter1 += `<span class="inline-block font-clash-display font-bold text-[120px] text-stroke">${el}</span>`
+        clutter1 += `<span class="inline-block text-stroke">${el}</span>`
     } else {
         clutter1 += `<span>${el}</span>`
     }
@@ -280,7 +282,7 @@ DDSBtimeline.from("#DESIGNER-txt-container span", {
 DEVELOPERtxtContainer.textContent = ""
 eachEl2.forEach((el, i) => {
     if (i === 8) {
-        clutter2 += `<span class="inline-block font-clash-display font-bold text-[150px] text-stroke">${el}</span>`
+        clutter2 += `<span class="inline-block text-stroke">${el}</span>`
     } else {
         clutter2 += `<span>${el}</span>`
     }
@@ -379,47 +381,3 @@ function hideServiceNav() {
     })
 }
 
-// calculate transform-origin so zoom focuses on the center of the “O”
-function setTransformOriginToO() {
-    const section = document.querySelector('#blog-header');
-    const oSpan = document.querySelector('.o-letter');
-
-    const secRect = section.getBoundingClientRect();
-    const oRect = oSpan.getBoundingClientRect();
-
-    const originX = ((oRect.left + oRect.right) / 2 - secRect.left) / secRect.width * 100;
-    const originY = ((oRect.top + oRect.bottom) / 2 - secRect.top) / secRect.height * 100;
-
-    gsap.set(section, { transformOrigin: `${originX}% ${originY}%` });
-}
-
-// run on load and also on resize (in case layout shifts)
-window.addEventListener('load', setTransformOriginToO);
-window.addEventListener('resize', setTransformOriginToO);
-
-// build the ScrollTrigger timeline
-const blogSectiontl = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#blog",
-        start: "top top",
-        end: "+=600%",       // adjust this value to control how much scroll it takes to fully zoom
-        scrub: 1,
-        pin: true,
-        onLeave: () => showNav(), // show nav when leaving the blog section
-        onEnterBack: () => hideNav() // hide nav when entering back into the blog section
-    }
-});
-
-// 1) zoom way in (tweak the scale to taste)
-blogSectiontl.to("#blog-header", {
-    scale: 150,
-    ease: "none"
-});
-
-// 2) once the text has zoomed completely out, fade in the inner content
-//    we stagger this so it happens near the end of the scroll
-blogSectiontl.to("#blog-content", {
-    opacity: 1,
-    ease: "none",
-    duration: 0.2
-}, "-=200%");  // start this tween 200% before the end of the timeline
