@@ -3,7 +3,8 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin"
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin)
 
 // Initialize Lenis
@@ -212,21 +213,25 @@ function updateStatsOnLoad() {
 
 // window.onload = updateStatsOnLoad (go to line 233)
 
+function animateSeeMoreLabel(label, arrow, path) {
+    const narrowArrowPath = `M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z`
+    const wideArrowPath = `M504 -480 L320 -712 L376 -768 L616 -480 L376 -192 L320 -248 Z`
+
+    label.addEventListener("mouseenter", () => {
+        gsap.to(arrow, { x: 4, duration: 0.3 })
+        gsap.to(path, { morphSVG: wideArrowPath, duration: 0.3, ease: "power1.inOut" })
+    })
+
+    label.addEventListener("mouseleave", () => {
+        gsap.to(arrow, { x: 0, duration: 0.3 })
+        gsap.to(path, { morphSVG: narrowArrowPath, duration: 0.3, ease: "power1.inOut" })
+    })
+}
+
 const seeMoreProjectsLabel = document.querySelector("#see-more-projects-label")
-const arrowContainer = document.querySelector("#arrow-svg-container")
-
-const narrowArrowPath = `M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z`
-const wideArrowPath = `M504 -480 L320 -712 L376 -768 L616 -480 L376 -192 L320 -248 Z`
-
-seeMoreProjectsLabel.addEventListener("mouseenter", () => {
-    gsap.to(arrowContainer, { x: 4, duration: 0.3 })
-    gsap.to("#arrow-svg-container path", { morphSVG: wideArrowPath, duration: 0.3, ease: "power1.inOut" })
-})
-
-seeMoreProjectsLabel.addEventListener("mouseleave", () => {
-    gsap.to(arrowContainer, { x: 0, duration: 0.3 })
-    gsap.to("#arrow-svg-container path", { morphSVG: narrowArrowPath, duration: 0.3, ease: "power1.inOut" })
-})
+const arrowContainerProjects = document.querySelector("#arrow-svg-container")
+const arrowContainerProjectsPath = document.querySelector("#arrow-svg-container path")
+animateSeeMoreLabel(seeMoreProjectsLabel, arrowContainerProjects, arrowContainerProjectsPath)
 
 const scrollCueBtn = document.querySelector("#scroll-cue-btn")
 
@@ -409,6 +414,8 @@ blogUnderlineParent.addEventListener("click", () => {
     document.querySelector("#blog").scrollIntoView({
         behavior: "smooth"
     })
+    isBlogActive = true
+    animateBlogUnderline()
 })
 blogUnderlineParent.addEventListener("mouseenter", () => {
     if (!isBlogActive) {
@@ -432,18 +439,26 @@ blogUnderlineParent.addEventListener("mouseleave", () => {
 ScrollTrigger.create({
     trigger: "#blog",
     start: "top top",
-    end: "bottom top",
+    end: "90% top",
     scrub: true,
     onToggle: self => {
         if (self.isActive) {
+            isContactActive = false
+            animateContactsUnderline()
             isBlogActive = true;
             showNav();
             setTimeout(animateBlogUnderline, 400); // Delay to ensure the underline animation is smooth
         } else {
             isBlogActive = false;
             animateBlogUnderline();
+            isContactActive = true;
+            setTimeout(animateContactsUnderline, 300) //so that the contact nav underline can be triggered as soon as blog underline gores away
         }
     },
+    onLeaveBack: () => {
+        isContactActive = false
+        animateBlogUnderline()
+    }
 })
 
 // Blog Header Navigation - moved to function for proper initialization
@@ -454,7 +469,7 @@ function setupBlogNavigation() {
         console.error("Blog header not found!");
         return;
     }
-    
+
     console.log("Blog header found:", blogHeader); // Debug log
     const blogHeaderItems = blogHeader.querySelectorAll("a");
     console.log("Found blog header items:", blogHeaderItems.length); // Debug log
@@ -483,7 +498,7 @@ function setupBlogNavigation() {
             console.error(`No element found with ID: "${sectionName}"`);
             return;
         }
-        
+
         if (currentActiveContent === targetContent) return;
 
         if (currentActiveContent) {
@@ -496,7 +511,7 @@ function setupBlogNavigation() {
                     currentActiveContent.style.display = "none";
 
                     // Show and fade in new content
-                    targetContent.style.display = "flex";
+                    targetContent.style.display = "grid";
                     gsap.fromTo(targetContent,
                         { opacity: 0 },
                         {
@@ -510,7 +525,7 @@ function setupBlogNavigation() {
             });
         } else {
             // First time - just show the content
-            targetContent.style.display = "flex";
+            targetContent.style.display = "grid";
             gsap.fromTo(targetContent,
                 { opacity: 0 },
                 {
@@ -559,7 +574,7 @@ function setupBlogNavigation() {
 
     blogHeaderItems.forEach((item, index) => {
         console.log(`Setting up nav item ${index}:`, item.textContent.trim(), "with classes:", Array.from(item.classList)); // Debug log
-        
+
         // Click handler for active state
         item.addEventListener("click", (e) => {
             e.preventDefault();
@@ -598,7 +613,7 @@ function setupBlogNavigation() {
     const firstContent = document.getElementById("ALL");
     if (firstContent) {
         currentActiveContent = firstContent;
-        firstContent.style.display = "flex";
+        firstContent.style.display = "grid";
     }
 }
 
@@ -681,3 +696,206 @@ function animate() {
     renderer.render(scene, camera)
 }
 animate()
+
+//see more posts
+const seeMorePostsLabel = document.querySelector("#see-more-posts-label")
+const arrowContainerBlog = document.querySelector("#arrow-svg-container-blog")
+const arrowContainerBlogPath = document.querySelector("#arrow-svg-container-blog path")
+animateSeeMoreLabel(seeMorePostsLabel, arrowContainerBlog, arrowContainerBlogPath)
+
+//contacts section
+const contactUnderline = document.querySelector("#contact-underline")
+const contactUnderlineParent = document.querySelector(".scroll-to-contact")
+let isContactActive = false
+
+function animateContactsUnderline() {
+    if (isContactActive) {
+        gsap.to(contactUnderline, {
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    } else {
+        gsap.to(contactUnderline, {
+            scaleX: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+}
+contactUnderlineParent.addEventListener("click", () => {
+    document.querySelector("#contact").scrollIntoView({
+        behavior: "smooth"
+    })
+})
+contactUnderlineParent.addEventListener("mouseenter", () => {
+    if (!isContactActive) {
+        gsap.to(contactUnderline, {
+            scaleX: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+})
+contactUnderlineParent.addEventListener("mouseleave", () => {
+    if (!isContactActive) {
+        gsap.to(contactUnderline, {
+            scaleX: 0,
+            duration: 0.3,
+            ease: "power1.inOut",
+        })
+    }
+})
+
+//Don't remove this becuase it is insicating that the contact section nav auto underline functionality is not implemented by here, it is integrated by the blog section 
+// ScrollTrigger.create({
+//     trigger: "#contact",
+//     start: "top top",
+//     end: "90% top",
+//     scrub: true,
+//     onLeaveBack: () => {
+//         isContactActive = false
+//         animateContactsUnderline();
+//     }
+// })
+
+
+//contact section functionality
+const contactTl = gsap.timeline({ paused: true })
+
+const readyPageBtn = document.querySelector("#ready-page-btn")
+const namePageBtn = document.querySelector("#name-page-btn")
+const emailPageBtn = document.querySelector("#email-page-btn")
+const submitBtn = document.querySelector("#submit-btn")
+
+// Initialize contact section on page load
+window.addEventListener('load', () => {
+    // Set initial state immediately when page loads
+    gsap.set(["#name-contact", "#email-contact", "#message-contact"], { 
+        opacity: 0, 
+        xPercent: 100 
+    })
+    gsap.set("#start-contact", { 
+        opacity: 1, 
+        xPercent: 0 
+    })
+    
+    console.log("Contact section initialized")
+})
+
+// Build the timeline for page transitions
+contactTl
+    // Transition from start-contact to name-contact
+    .to("#start-contact", { 
+        xPercent: -100, 
+        opacity: 0, 
+        duration: 0.6, 
+        ease: "power2.inOut" 
+    })
+    .fromTo("#name-contact", 
+        { xPercent: 100, opacity: 0 }, 
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+        "-=0.3"
+    )
+    .addPause()
+    
+    // Transition from name-contact to email-contact
+    .to("#name-contact", { 
+        xPercent: -100, 
+        opacity: 0, 
+        duration: 0.6, 
+        ease: "power2.inOut" 
+    })
+    .fromTo("#email-contact", 
+        { xPercent: 100, opacity: 0 }, 
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+        "-=0.3"
+    )
+    .addPause()
+    
+    // Transition from email-contact to message-contact
+    .to("#email-contact", { 
+        xPercent: -100, 
+        opacity: 0, 
+        duration: 0.6, 
+        ease: "power2.inOut" 
+    })
+    .fromTo("#message-contact", 
+        { xPercent: 100, opacity: 0 }, 
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+        "-=0.3"
+    )
+    .addPause()
+    
+    // Transition from message-contact back to start-contact (loop)
+    .to("#message-contact", { 
+        xPercent: -100, 
+        opacity: 0, 
+        duration: 0.6, 
+        ease: "power2.inOut" 
+    })
+    .fromTo("#start-contact", 
+        { xPercent: 100, opacity: 0 }, 
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+        "-=0.3"
+    )
+    .call(() => {
+        // Reset timeline to beginning so it can be restarted
+        contactTl.progress(0).pause()
+        console.log("Timeline reset to beginning")
+    })
+
+// Event listeners with null checks
+if (readyPageBtn) {
+    readyPageBtn.addEventListener("click", () => {
+        console.log("Ready button clicked - transitioning to name page")
+        contactTl.play()
+    })
+}
+
+if (namePageBtn) {
+    namePageBtn.addEventListener("click", () => {
+        console.log("Name button clicked - transitioning to email page")
+        contactTl.play()
+    })
+}
+
+if (emailPageBtn) {
+    emailPageBtn.addEventListener("click", () => {
+        console.log("Email button clicked - transitioning to message page")
+        contactTl.play()
+    })
+}
+
+if (submitBtn) {
+    submitBtn.addEventListener("click", () => {
+        console.log("Submit button clicked - transitioning back to start")
+        contactTl.play()
+    })
+}
+
+//message placeholder
+const formMessage = document.querySelector("#form-message")
+const formMessagePlaceholder = document.querySelector("#form-message-placeholder")
+
+// Add null checks to prevent errors
+if (formMessage && formMessagePlaceholder) {
+    formMessage.addEventListener("focus", () => {
+        formMessagePlaceholder.style.display = "none"
+    })
+
+    formMessage.addEventListener("blur", () => {
+        if (!formMessage.value.trim()) {
+            formMessagePlaceholder.style.display = "flex"
+        }
+    })
+
+    // Also handle input event for real-time updates
+    formMessage.addEventListener("input", () => {
+        if (formMessage.value.trim()) {
+            formMessagePlaceholder.style.display = "none"
+        } else {
+            formMessagePlaceholder.style.display = "flex"
+        }
+    })
+}
