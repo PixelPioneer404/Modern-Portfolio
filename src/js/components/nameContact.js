@@ -1,3 +1,5 @@
+import { contactDataManager } from './contactDataManager.js'
+
 const nameContactForm = document.querySelector("#name-contact-form")
 const nameInput = nameContactForm?.querySelector("input")
 const nameNextBtn = nameContactForm?.querySelector("button")
@@ -22,6 +24,15 @@ if (nameContactForm && nameInput && nameNextBtn) {
             nameNextBtn.classList.add("opacity-40")
             nameNextBtn.classList.add("pointer-events-none")
             nameNextBtn.classList.add("cursor-not-allowed")
+        }
+    })
+
+    // Handle name submission when next button is clicked
+    nameNextBtn.addEventListener("click", () => {
+        if (nameInput.value.trim()) {
+            // Store name data and clear field
+            contactDataManager.setName(nameInput.value.trim())
+            console.log("Name collected and stored:", nameInput.value.trim())
         }
     })
 } else {

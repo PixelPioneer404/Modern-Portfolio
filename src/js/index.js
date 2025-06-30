@@ -7,6 +7,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import "./components/nameContact.js"
 import "./components/emailContact.js"
 import { animateSubmitBtn, updateContactMessages, resetContactFormHistory } from "./components/messageContact.js"
+import { contactDataManager } from "./components/contactDataManager.js"
 
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin)
 
@@ -775,6 +776,91 @@ const nameField = document.querySelector("#form-username")
 const emailField = document.querySelector("#form-email")
 const emailAlert = document.querySelector("#email-alert")
 
+// Contact form keyboard handler - centralized and clean
+let currentContactStep = 'start' // Track current step: 'start', 'name', 'email', 'message'
+let keyboardHandlerActive = false
+
+function handleContactKeyboard(event) {
+    // Only handle Enter key
+    if (event.key !== 'Enter') return
+    
+    // Only handle if we're in a contact form context
+    const contactSection = document.querySelector('#contact')
+    if (!contactSection) return
+    
+    // Check if contact section is visible (rough check)
+    const contactRect = contactSection.getBoundingClientRect()
+    const isContactVisible = contactRect.top < window.innerHeight && contactRect.bottom > 0
+    if (!isContactVisible) return
+    
+    // Prevent default form submission
+    event.preventDefault()
+    
+    try {
+        switch (currentContactStep) {
+            case 'start':
+                if (readyPageBtn) {
+                    console.log("Enter pressed - transitioning to name page")
+                    readyPageBtn.click()
+                }
+                break
+                
+            case 'name':
+                if (namePageBtn && nameField && nameField.value.trim()) {
+                    console.log("Enter pressed - transitioning to email page")
+                    namePageBtn.click()
+                }
+                break
+                
+            case 'email':
+                if (emailPageBtn && emailField && emailField.value.trim()) {
+                    console.log("Enter pressed - validating email and transitioning")
+                    emailPageBtn.click()
+                }
+                break
+                
+            case 'message':
+                if (submitBtn) {
+                    // Check if submit button is not disabled
+                    if (submitBtn.classList.contains('pointer-events-none')) {
+                        console.log("Enter pressed but submit button is disabled (sending in progress)")
+                        return
+                    }
+                    
+                    const messageField = document.querySelector("#form-message")
+                    if (messageField && messageField.value.trim()) {
+                        console.log("Enter pressed - submitting form")
+                        submitBtn.click()
+                    }
+                }
+                break
+                
+            default:
+                console.warn("Unknown contact step:", currentContactStep)
+        }
+    } catch (error) {
+        console.error("Error in keyboard handler:", error)
+    }
+}
+
+// Initialize keyboard handler - single global listener
+function initContactKeyboardHandler() {
+    if (keyboardHandlerActive) return // Prevent multiple listeners
+    
+    document.addEventListener('keydown', handleContactKeyboard)
+    keyboardHandlerActive = true
+    console.log("Contact keyboard handler initialized")
+}
+
+// Cleanup keyboard handler if needed
+function cleanupContactKeyboardHandler() {
+    if (!keyboardHandlerActive) return
+    
+    document.removeEventListener('keydown', handleContactKeyboard)
+    keyboardHandlerActive = false
+    console.log("Contact keyboard handler cleaned up")
+}
+
 // Initialize contact section on page load
 window.addEventListener('load', () => {
     // Set initial state immediately when page loads
@@ -786,6 +872,10 @@ window.addEventListener('load', () => {
         opacity: 1,
         xPercent: 0
     })
+    
+    // Initialize keyboard handler and set initial step
+    currentContactStep = 'start'
+    initContactKeyboardHandler()
 
     console.log("Contact section initialized")
 })
@@ -807,6 +897,8 @@ contactTl
     .call(() => {
         // Focus name field when name page is visible
         if (nameField) nameField.focus()
+        // Update current step for keyboard handler
+        currentContactStep = 'name'
     })
     .addPause()
 
@@ -817,6 +909,12 @@ contactTl
         duration: 0.6,
         ease: "power2.inOut"
     })
+    .call(() => {
+        // Clear name field after user has moved away from name page
+        if (nameField) {
+            nameField.value = ''
+        }
+    })
     .fromTo("#email-contact",
         { xPercent: 100, opacity: 0 },
         { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" },
@@ -825,6 +923,8 @@ contactTl
     .call(() => {
         // Focus email field when email page is visible
         if (emailField) emailField.focus()
+        // Update current step for keyboard handler
+        currentContactStep = 'email'
     })
     .addPause()
 
@@ -836,8 +936,14 @@ contactTl
         ease: "power2.inOut"
     })
     .call(() => {
+        // Clear email field after user has moved away from email page
+        if (emailField) {
+            emailField.value = ''
+        }
         // Focus message field when message page is visible
         if (formMessage) formMessage.focus()
+        // Update current step for keyboard handler
+        currentContactStep = 'message'
     })
     .fromTo("#message-contact",
         { xPercent: 100, opacity: 0 },
@@ -857,6 +963,26 @@ contactTl
         // Update contact messages BEFORE start screen becomes visible
         // This ensures the text change happens while the screen is transitioning
         updateContactMessages()
+        
+        // Clear all form fields after user has moved away from message page
+        // This ensures a clean slate for the next form cycle
+        const messageField = document.querySelector("#form-message")
+        const placeholder = document.querySelector("#form-message-placeholder")
+        
+        if (messageField) {
+            messageField.value = ''
+        }
+        if (placeholder) {
+            placeholder.style.display = 'flex'
+        }
+        
+        // Also clear name and email fields to ensure clean state
+        if (nameField) {
+            nameField.value = ''
+        }
+        if (emailField) {
+            emailField.value = ''
+        }
     })
     .fromTo("#start-contact",
         { xPercent: 100, opacity: 0 },
@@ -866,6 +992,8 @@ contactTl
     .call(() => {
         // Reset timeline to beginning so it can be restarted
         contactTl.progress(0).pause()
+        // Reset to start step for keyboard handler
+        currentContactStep = 'start'
         console.log("Timeline reset to beginning")
     })
 
@@ -886,11 +1014,18 @@ if (namePageBtn) {
 
 if (emailPageBtn) {
     emailPageBtn.addEventListener("click", () => {
-        if (!emailField.value.includes("@")) {
+        const emailValue = emailField.value.trim()
+        
+        if (!emailValue.includes("@")) {
             emailAlert.classList.remove("opacity-0")
             emailAlert.classList.add("opacity-100")
         } else {
-            console.log("Email button clicked - transitioning to message page")
+            console.log("Email button clicked - storing email and transitioning to message page")
+            
+            // Store email data (field will be cleared in timeline after transition)
+            contactDataManager.setEmail(emailValue)
+            
+            // Proceed to next step
             contactTl.play()
         }
     })
@@ -935,3 +1070,8 @@ if (formMessage && formMessagePlaceholder) {
 // Make resetContactFormHistory available globally for testing purposes
 // You can call resetContactFormHistory() in the browser console to test
 window.resetContactFormHistory = resetContactFormHistory
+
+// Cleanup on page unload (optional safety measure)
+window.addEventListener('beforeunload', () => {
+    cleanupContactKeyboardHandler()
+})
