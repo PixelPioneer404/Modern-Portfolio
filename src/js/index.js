@@ -4,6 +4,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin"
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import "./components/nameContact.js"
+import "./components/emailContact.js"
+import { animateSubmitBtn, updateContactMessages, resetContactFormHistory } from "./components/messageContact.js"
 
 gsap.registerPlugin(ScrollTrigger, MorphSVGPlugin)
 
@@ -24,6 +27,7 @@ window.onload = () => {
     updateStatsOnLoad()
     // btnEnters()
     setupBlogNavigation() // Add blog navigation setup
+    updateContactMessages() // Update contact messages based on submission history
 }
 
 // 1) grab section + wrapper
@@ -767,76 +771,96 @@ const readyPageBtn = document.querySelector("#ready-page-btn")
 const namePageBtn = document.querySelector("#name-page-btn")
 const emailPageBtn = document.querySelector("#email-page-btn")
 const submitBtn = document.querySelector("#submit-btn")
+const nameField = document.querySelector("#form-username")
+const emailField = document.querySelector("#form-email")
+const emailAlert = document.querySelector("#email-alert")
 
 // Initialize contact section on page load
 window.addEventListener('load', () => {
     // Set initial state immediately when page loads
-    gsap.set(["#name-contact", "#email-contact", "#message-contact"], { 
-        opacity: 0, 
-        xPercent: 100 
+    gsap.set(["#name-contact", "#email-contact", "#message-contact"], {
+        opacity: 0,
+        xPercent: 100
     })
-    gsap.set("#start-contact", { 
-        opacity: 1, 
-        xPercent: 0 
+    gsap.set("#start-contact", {
+        opacity: 1,
+        xPercent: 0
     })
-    
+
     console.log("Contact section initialized")
 })
 
 // Build the timeline for page transitions
 contactTl
     // Transition from start-contact to name-contact
-    .to("#start-contact", { 
-        xPercent: -100, 
-        opacity: 0, 
-        duration: 0.6, 
-        ease: "power2.inOut" 
+    .to("#start-contact", {
+        xPercent: -100,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
     })
-    .fromTo("#name-contact", 
-        { xPercent: 100, opacity: 0 }, 
-        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+    .fromTo("#name-contact",
+        { xPercent: 100, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" },
         "-=0.3"
     )
+    .call(() => {
+        // Focus name field when name page is visible
+        if (nameField) nameField.focus()
+    })
     .addPause()
-    
+
     // Transition from name-contact to email-contact
-    .to("#name-contact", { 
-        xPercent: -100, 
-        opacity: 0, 
-        duration: 0.6, 
-        ease: "power2.inOut" 
+    .to("#name-contact", {
+        xPercent: -100,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
     })
-    .fromTo("#email-contact", 
-        { xPercent: 100, opacity: 0 }, 
-        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+    .fromTo("#email-contact",
+        { xPercent: 100, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" },
         "-=0.3"
     )
+    .call(() => {
+        // Focus email field when email page is visible
+        if (emailField) emailField.focus()
+    })
     .addPause()
-    
+
     // Transition from email-contact to message-contact
-    .to("#email-contact", { 
-        xPercent: -100, 
-        opacity: 0, 
-        duration: 0.6, 
-        ease: "power2.inOut" 
+    .to("#email-contact", {
+        xPercent: -100,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
     })
-    .fromTo("#message-contact", 
-        { xPercent: 100, opacity: 0 }, 
-        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+    .call(() => {
+        // Focus message field when message page is visible
+        if (formMessage) formMessage.focus()
+    })
+    .fromTo("#message-contact",
+        { xPercent: 100, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" },
         "-=0.3"
     )
     .addPause()
-    
+
     // Transition from message-contact back to start-contact (loop)
-    .to("#message-contact", { 
-        xPercent: -100, 
-        opacity: 0, 
-        duration: 0.6, 
-        ease: "power2.inOut" 
+    .to("#message-contact", {
+        xPercent: -100,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.inOut"
     })
-    .fromTo("#start-contact", 
-        { xPercent: 100, opacity: 0 }, 
-        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" }, 
+    .call(() => {
+        // Update contact messages BEFORE start screen becomes visible
+        // This ensures the text change happens while the screen is transitioning
+        updateContactMessages()
+    })
+    .fromTo("#start-contact",
+        { xPercent: 100, opacity: 0 },
+        { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.inOut" },
         "-=0.3"
     )
     .call(() => {
@@ -862,15 +886,23 @@ if (namePageBtn) {
 
 if (emailPageBtn) {
     emailPageBtn.addEventListener("click", () => {
-        console.log("Email button clicked - transitioning to message page")
-        contactTl.play()
+        if (!emailField.value.includes("@")) {
+            emailAlert.classList.remove("opacity-0")
+            emailAlert.classList.add("opacity-100")
+        } else {
+            console.log("Email button clicked - transitioning to message page")
+            contactTl.play()
+        }
     })
 }
 
 if (submitBtn) {
     submitBtn.addEventListener("click", () => {
         console.log("Submit button clicked - transitioning back to start")
-        contactTl.play()
+        animateSubmitBtn()
+        setTimeout(()=>{
+            contactTl.play()
+        }, 3000)
     })
 }
 
@@ -899,3 +931,7 @@ if (formMessage && formMessagePlaceholder) {
         }
     })
 }
+
+// Make resetContactFormHistory available globally for testing purposes
+// You can call resetContactFormHistory() in the browser console to test
+window.resetContactFormHistory = resetContactFormHistory

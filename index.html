@@ -2333,7 +2333,8 @@
             </div>
             <div id="contact-content"
                 class="shadow-md z-11 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[55%] rounded-4xl bg-white/20 backdrop-blur-[20px] border-1 border-[#bab5ab]/50 flex justify-center items-center overflow-hidden">
-                <div id="start-contact" class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-8">
+                <div id="start-contact"
+                    class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-8">
                     <!-- Contact Text -->
                     <div class="text-center">
                         <h3 class="text-2xl font-satoshi font-bold text-[#191923]/80 mb-2">Ready to collaborate?</h3>
@@ -2356,9 +2357,10 @@
                         </svg>
                     </button>
                 </div>
-                <div id="name-contact" class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
+                <div id="name-contact"
+                    class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
                     <h1 class="text-4xl font-satoshi font-bold text-[#191923]/60">Let's know your name first</h1>
-                    <div class="flex w-[60%] h-15 gap-2">
+                    <div id="name-contact-form" class="flex w-[60%] h-15 gap-2">
                         <input
                             class="w-[calc(100%-68px)] h-15 rounded-2xl bg-white/40 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 px-5 py-2 text-lg text-[var(--primary-text-color)]/80 font-satoshi font-normal focus:outline-none focus:ring-0"
                             type="text" name="Name" id="form-username" placeholder="Name">
@@ -2372,12 +2374,16 @@
                         </button>
                     </div>
                 </div>
-                <div id="email-contact" class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
+                <div id="email-contact"
+                    class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
                     <h1 class="text-4xl font-satoshi font-bold text-[#191923]/60">Let's stay in touch</h1>
-                    <div class="flex w-[60%] h-15 gap-2">
+                    <div id="email-contact-form" class="relative flex w-[60%] h-15 gap-2">
                         <input
                             class="w-[calc(100%-68px)] h-15 rounded-2xl bg-white/40 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 px-5 py-2 text-lg text-[var(--primary-text-color)]/80 font-satoshi font-normal focus:outline-none focus:ring-0"
                             type="text" name="Email" id="form-email" placeholder="Email">
+                        <div id="email-alert"
+                            class="opacity-0 absolute -bottom-6 left-2 text-sm text-red-700 font-medium font-sans transition-all duration-200 ease-in-out">
+                            Email should contain '@' symbol</div>
                         <button id="email-page-btn"
                             class="aspect-square h-15 rounded-2xl bg-white/40 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 flex justify-center items-center hover:bg-white/40 transition-all duration-300 ease-out hover:scale-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.1)] cursor-pointer">
                             <svg class="w-6 h-6 text-[#191923]/60 group-hover:text-[#191923] transition-all duration-300"
@@ -2388,18 +2394,23 @@
                         </button>
                     </div>
                 </div>
-                <div id="message-contact" class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
+                <div id="message-contact"
+                    class="absolute m-0 w-full h-full flex flex-col justify-center items-center gap-12">
                     <h1 class="text-4xl font-satoshi font-bold text-[#191923]/60">Our first conversation.</h1>
                     <div class="relative flex flex-col w-[60%] h-[50%] gap-2">
                         <textarea
                             class="resize-none w-full h-[calc(100%-68px)] rounded-3xl bg-white/40 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 px-8 py-8 text-lg text-[var(--primary-text-color)]/80 font-satoshi font-normal focus:outline-none focus:ring-0"
                             type="text" name="Message" id="form-message"></textarea>
-                        <div class="w-full h-[calc(100%-68px)] absolute inset-0 flex justify-center items-center pointer-events-none" id="form-message-placeholder">
-                            <p class="text-lg text-[var(--primary-text-color)]/40 font-satoshi font-normal">Your message</p>
+                        <div class="w-full h-[calc(100%-68px)] absolute inset-0 flex justify-center items-center pointer-events-none"
+                            id="form-message-placeholder">
+                            <p class="text-lg text-[var(--primary-text-color)]/40 font-satoshi font-normal">Your message
+                            </p>
                         </div>
                         <button type="submit" id="submit-btn"
-                            class="w-full h-12 rounded-2xl bg-white/80 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 flex justify-center items-center transition-all duration-300 ease-out hover:scale-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.1)] cursor-pointer">
-                            Submit
+                            class="relative w-full h-12 rounded-2xl bg-white/80 backdrop-blur-[10px] border-1 border-[#bab5ab]/40 flex justify-center items-center transition-all duration-300 ease-out hover:scale-102 hover:shadow-[0_0_10px_rgba(0,0,0,0.1)] cursor-pointer">
+                            <p id="submit-btn-submit"
+                                class="text-[var(--primary-text-color)] text-base font-satoshi font-medium pointer-events-none">
+                                Submit</p>
                         </button>
                     </div>
                 </div>
