@@ -19,7 +19,6 @@ function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
 }
-
 requestAnimationFrame(raf);
 
 window.onload = () => {
@@ -1075,3 +1074,21 @@ window.resetContactFormHistory = resetContactFormHistory
 window.addEventListener('beforeunload', () => {
     cleanupContactKeyboardHandler()
 })
+
+//footer
+document.getElementById("footer-year").textContent = new Date().getFullYear();
+
+// Scroll to top functionality
+const scrollToTopBtn = document.querySelector("#scroll-to-top-btn")
+
+if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", () => {
+        // Scroll to top of the page
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    })
+} else {
+    console.warn("Scroll to top button not found")
+}
