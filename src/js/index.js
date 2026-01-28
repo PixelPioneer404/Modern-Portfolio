@@ -21,7 +21,112 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+// Mobile Message Animation
+function animateMobileMessage() {
+    const mobileMessage = document.getElementById('mobile-message');
+    if (!mobileMessage) return;
+
+    // Set initial states
+    gsap.set("#mobile-icon-container", { scale: 0, opacity: 0 });
+    gsap.set("#mobile-title", { y: 20, opacity: 0 });
+    gsap.set("#mobile-desc", { y: 20, opacity: 0 });
+    gsap.set("#mobile-arrow", { y: 20, opacity: 0 });
+    gsap.set("#mobile-footer", { opacity: 0 });
+    gsap.set("#mobile-socials", { opacity: 0, y: 10 });
+
+    // Create a timeline for sequential animations
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    // Animate icon container
+    tl.to("#mobile-icon-container", {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.7)"
+    })
+    // Animate title
+    .to("#mobile-title", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6
+    }, "-=0.4")
+    // Animate description
+    .to("#mobile-desc", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6
+    }, "-=0.3")
+    // Animate arrow
+    .to("#mobile-arrow", {
+        opacity: 1,
+        y: 0,
+        duration: 0.6
+    }, "-=0.3")
+    // Animate footer
+    .to("#mobile-footer", {
+        opacity: 1,
+        duration: 0.5
+    }, "-=0.2")
+    // Animate social icons
+    .to("#mobile-socials", {
+        opacity: 1,
+        y: 0,
+        duration: 0.5
+    }, "-=0.3");
+
+    // Animate background circles continuously
+    gsap.to("#bg-circle-1", {
+        rotation: 360,
+        duration: 20,
+        repeat: -1,
+        ease: "none"
+    });
+
+    gsap.to("#bg-circle-2", {
+        rotation: -360,
+        duration: 25,
+        repeat: -1,
+        ease: "none"
+    });
+
+    // Animate the dots in the arrow
+    gsap.to("#mobile-arrow .rounded-full", {
+        scale: 1.5,
+        opacity: 0.5,
+        duration: 1,
+        stagger: 0.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut"
+    });
+
+    // Pulse animation for the phone icon
+    gsap.to("#mobile-icon-container .ri-smartphone-line", {
+        scale: 1.1,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut"
+    });
+
+    // Add hover animations for social icons
+    const socialIcons = document.querySelectorAll("#mobile-socials a");
+    socialIcons.forEach(icon => {
+        icon.addEventListener("mouseenter", () => {
+            gsap.to(icon, { scale: 1.2, duration: 0.3, ease: "back.out(1.7)" });
+        });
+        icon.addEventListener("mouseleave", () => {
+            gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
+        });
+    });
+}
+
 window.onload = () => {
+    // Initialize mobile message animation on load
+    if (window.innerWidth < 1024) {
+        animateMobileMessage();
+    }
+    
     // animateNav()
     // animateSocialLabels()
     updateStatsOnLoad()

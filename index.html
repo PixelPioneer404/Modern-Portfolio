@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajbeer Saha | Portfolio</title>
-    <link rel="stylesheet" href="/css/output.css">
+    <link rel="stylesheet" href="./output.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.4/dist/lenis.css">
     <link rel="shortcut icon" href="/src/assets/favico.png" type="image/png">
@@ -14,8 +14,76 @@
 </head>
 
 <body class="bg-[var(--bg-color)] select-none overflow-x-hidden">
+    <!-- Mobile Not Supported Message -->
+    <div id="mobile-message" class="lg:hidden fixed inset-0 z-[9999] bg-[var(--bg-color)] flex flex-col justify-center items-center px-8">
+        <div class="relative w-full max-w-md flex flex-col items-center gap-8">
+            <!-- Animated Icon -->
+            <div id="mobile-icon-container" class="relative w-20 h-20">
+                <div class="absolute inset-0 border-2 border-[var(--primary-text-color)] rounded-lg transform rotate-0">
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-8 bg-[var(--primary-text-color)]"></div>
+                </div>
+                <div class="absolute inset-0 flex justify-center items-center">
+                    <i class="ri-smartphone-line text-4xl text-[var(--primary-text-color)]"></i>
+                </div>
+                <div class="absolute -top-1 -right-1 w-6 h-6 bg-[var(--bg-color)] border-2 border-[var(--primary-text-color)] rounded-full flex justify-center items-center">
+                    <i class="ri-close-line text-sm text-[var(--primary-text-color)]"></i>
+                </div>
+            </div>
+
+            <!-- Main Message -->
+            <div class="flex flex-col items-center gap-4 text-center">
+                <h1 id="mobile-title" class="font-clash-display font-bold text-3xl text-[var(--primary-text-color)] leading-tight">
+                    Desktop Only
+                </h1>
+                <div id="mobile-desc" class="font-satoshi text-base text-[var(--primary-text-color)]/80 leading-relaxed space-y-3">
+                    <p>This portfolio experience is optimized for desktop viewing.</p>
+                    <p class="text-sm">Please open this website on a larger screen to explore the full interactive experience.</p>
+                </div>
+            </div>
+
+            <!-- Animated Arrow -->
+            <div id="mobile-arrow" class="flex flex-col items-center gap-2">
+                <div class="relative w-16 h-16 border-2 border-[var(--primary-text-color)] rounded-lg flex justify-center items-center">
+                    <i class="ri-computer-line text-2xl text-[var(--primary-text-color)]"></i>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 bg-[var(--primary-text-color)] rounded-full"></div>
+                    <div class="w-2 h-2 bg-[var(--primary-text-color)] rounded-full"></div>
+                    <div class="w-2 h-2 bg-[var(--primary-text-color)] rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Footer Text -->
+            <p id="mobile-footer" class="font-satoshi font-semibold text-xs text-[var(--primary-text-color)]/60 tracking-widest">
+                RAJBEER SAHA
+            </p>
+
+            <!-- Social Links -->
+            <div id="mobile-socials" class="flex items-center gap-6 mt-2">
+                <a href="https://www.linkedin.com/in/rajbeer-saha-123456789/" target="_blank" 
+                   class="text-[var(--primary-text-color)]/60 hover:text-[var(--primary-text-color)] transition-colors duration-300">
+                    <i class="ri-linkedin-box-fill text-2xl"></i>
+                </a>
+                <a href="https://www.instagram.com/rajbeerdesu_" target="_blank"
+                   class="text-[var(--primary-text-color)]/60 hover:text-[var(--primary-text-color)] transition-colors duration-300">
+                    <i class="ri-instagram-line text-2xl"></i>
+                </a>
+                <a href="https://github.com/pixelpioneer404" target="_blank"
+                   class="text-[var(--primary-text-color)]/60 hover:text-[var(--primary-text-color)] transition-colors duration-300">
+                    <i class="ri-github-fill text-2xl"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div id="bg-circle-1" class="absolute w-64 h-64 border-1 border-[var(--primary-text-color)]/10 rounded-full -top-32 -left-32"></div>
+            <div id="bg-circle-2" class="absolute w-96 h-96 border-1 border-[var(--primary-text-color)]/10 rounded-full -bottom-48 -right-48"></div>
+        </div>
+    </div>
+
     <div id="social-container"
-        class="absolute right-8 top-1/5 origin-right flex justify-center items-center gap-4 -rotate-90">
+        class="hidden lg:flex absolute right-8 top-1/5 origin-right justify-center items-center gap-4 -rotate-90">
         <div id="linkedin-text"
             class="social-label font-satoshi font-semibold text-[12px] 2xl:text-[14px] text-[var(--primary-text-color)] translate-y-0">
             <a href="https://www.linkedin.com/in/rajbeer-saha-123456789/" class="decoration-none"
@@ -23,7 +91,7 @@
         </div>
         <div id="instagram-text"
             class="social-label font-satoshi font-semibold text-[12px] 2xl:text-[14px] text-[var(--primary-text-color)] translate-y-0">
-            <a href="https://www.instagram.com/raj_vir202" class="decoration-none" target="_blank">INSTAGRAM</a>
+            <a href="https://www.instagram.com/rajbeerdesu_" class="decoration-none" target="_blank">INSTAGRAM</a>
         </div>
         <div id="github-text"
             class="social-label font-satoshi font-semibold text-[12px] 2xl:text-[14px] text-[var(--primary-text-color)] translate-y-0">
@@ -38,7 +106,7 @@
             <i id="github-icon" class="ri-github-fill text-[var(--primary-text-color)] text-xl opacity-0 rotate-90"></i>
         </div>
     </div>
-    <header class="fixed top-0 w-full h-16 2xl:h-20 bg-transparent z-50 backdrop-blur-sm">
+    <header class="hidden lg:block fixed top-0 w-full h-16 2xl:h-20 bg-transparent z-50 backdrop-blur-sm">
         <nav
             class="flex items-center justify-between h-full px-8 text-sm 2xl:text-base font-medium text-[var(--primary-text-color)]">
             <!-- 1. Logo -->
@@ -93,7 +161,7 @@
             </button>
         </nav>
     </header>
-    <main class="w-full h-[calc(100vh-64px)] mt-16">
+    <main class="hidden lg:block w-full h-[calc(100vh-64px)] mt-16">
         <section class="w-full h-full grid grid-cols-[85%_15%] 2xl:grid-cols-[82%_18%] px-8 pb-4" id="home">
             <div class="relative w-auto h-auto m-0 p-0 flex flex-col justify-end items-start">
                 <div class="relative my-auto 2xl:mb-10 -translate-y-1/2 flex justify-start items-center gap-8">
@@ -2440,7 +2508,7 @@
                     Github
                 </a>
                 <p class="text-[var(--bg-color)]">•</p>
-                <a href="https://instagram.com/raj_vir202" target="_blank"
+                <a href="https://instagram.com/rajbeerdesu_" target="_blank"
                     class="decoration-none text-center text-lg text-[var(--bg-color)] font-manrope font-medium cursor-pointer">
                     Instagram
                 </a>
